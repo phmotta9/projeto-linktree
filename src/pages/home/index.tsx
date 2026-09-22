@@ -11,7 +11,7 @@ export function Home() {
         <section className="bg-white mb-4 w-full py-2 rounded-lg select-none transition-transform hover:scale-105 cursor-pointer">
           <a href="">
             <p className="text-base md:text-lg">
-              Linkdin
+              Linkedin
             </p>
           </a>
         </section>
