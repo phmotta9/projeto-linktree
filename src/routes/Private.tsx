@@ -8,7 +8,7 @@ interface PrivateProps {
   children: ReactNode;
 }
 
-export function Private({ children }: PrivateProps): any {
+export function Private({ children }: PrivateProps): ReactNode {
     const [loading, setLoading] = useState(true);
     const [signed, setSigned] = useState(false);
 

@@ -5,17 +5,21 @@ import { Input } from "../../components/input";
 
 import { auth } from "../../services/firebaseConnection";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { FaLink } from "react-icons/fa";
+import { FeedbackToast } from "../../components/feedback";
+import { useFeedback } from "../../hooks/useFeedback";
 
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { message, showFeedback } = useFeedback();
 
   function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     
-    if(email === "" && password === "") {
-      alert("Preencha todos os campos!");
+    if(email === "" || password === "") {
+      showFeedback("Preencha seu e-mail e sua senha");
       return;
     }
 
@@ -24,21 +28,21 @@ export function Login() {
         console.log("Usuário logado com sucesso!");
         navigate("/admin", { replace: true });
       })
-      .catch((error) => {
-        console.log("Erro ao logar usuário: ")
-        console.log(error);
+      .catch(() => {
+        showFeedback("Não foi possível entrar. Confira seus dados.");
       });
   }
 
   return (
-    <div className="flex w-full h-screen items-center justify-center flex-col">
-      <Link to="/">
-        <h1 className="mt-11 text-white mb-7 font-bold text-5xl">Dev
-        <span className="bg-linear-to-r from-yellow-500 to-orange-400 bg-clip-text text-transparent">Link</span>
-        </h1>
-      </Link>
+    <div className="flex min-h-screen w-full items-center justify-center px-4 py-8">
+      <div className="relative flex min-h-[32rem] w-full max-w-sm flex-col items-center overflow-hidden rounded-[2rem] px-6 pb-8 pt-16">
+        <div className="mb-5 text-orange-400"><FaLink size={54} /></div>
+        <Link to="/" className="mb-2">
+          <h1 className="text-4xl font-bold tracking-tight text-white">Link<span className="text-orange-500">Hub</span></h1>
+        </Link>
+        <p className="mb-10 text-sm text-orange-100/80">Seus links, do seu jeito.</p>
 
-      <form onSubmit={handleSubmit} className="w-full max-w-xl flex flex-col px-2">
+      <form onSubmit={handleSubmit} className="mt-3 flex w-full flex-col">
         <Input 
           type="email"
           placeholder="Digite seu email"
@@ -54,10 +58,12 @@ export function Login() {
 
         <button 
         type="submit"
-        className="h-9 bg-blue-600 rounded border-0 text-lg font-medium text-white">
+        className="mt-2 h-11 rounded-lg bg-orange-600 text-base font-medium text-white transition-colors hover:bg-orange-500">
           Entrar
         </button>
       </form>
+      </div>
+      <FeedbackToast message={message} />
     </div>
   );
 }

@@ -1,11 +1,11 @@
 import type { InputHTMLAttributes } from "react";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
+type InputProps = InputHTMLAttributes<HTMLInputElement>;
 
 export function Input(props: InputProps) {
   return (
     <input
-      className="bg-white border-0 h-9 rounded-md outline-none px-2 mb-3"
+      className="mb-3 h-10 w-full rounded-md border-0 bg-white px-3 text-sm text-zinc-900 outline-none transition focus:ring-2 focus:ring-orange-400/60"
       {...props}
     />
   );

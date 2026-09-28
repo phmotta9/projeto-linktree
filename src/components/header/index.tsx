@@ -10,21 +10,21 @@ export function Header() {
     }
 
     return (
-        <header className="w-full max-w-2xl mt-4 px-1">
-            <nav className="w-full bg-white h-12 flex items-center justify-between rounded-md px-3">
-                <div className="flex gap-4 font-medium">
-                    <Link to="/">
+        <header className="mt-4 w-full max-w-2xl px-1">
+            <nav className="flex h-12 w-full items-center justify-between rounded-md border border-white/10 bg-zinc-950/70 px-3">
+                <div className="flex flex-wrap gap-4 text-sm font-medium text-zinc-200">
+                    <Link className="hover:text-white" to="/">
                         Início
                     </Link>
-                    <Link to="/admin">
+                    <Link className="hover:text-white" to="/admin">
                         Admin
                     </Link>
-                    <Link to="/admin/social">
+                    <Link className="hover:text-white" to="/admin/social">
                         Redes Sociais
                     </Link>
                 </div>
 
-                <button onClick={handleLogout}>
+                <button aria-label="Sair" className="flex h-9 w-9 shrink-0 items-center justify-center rounded transition hover:bg-white/5" onClick={handleLogout}>
                     <BiLogOut size={28} color="#db2629" />
                 </button>
             </nav>
